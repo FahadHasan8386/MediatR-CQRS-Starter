@@ -49,4 +49,10 @@ public class ProductsController : Controller
         var id = await _mediator.Send(createProductCommand);
         return CreatedAtAction(nameof(GetProduct), new { id }, id);
     }
+
+    [HttpDelete]
+    public async Task<ActionResult<Guid> DeleteProduct(Guid id)
+    {
+
+    }
 }
