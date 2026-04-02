@@ -50,10 +50,15 @@ public class ProductsController : Controller
         return CreatedAtAction(nameof(GetProduct), new { id }, id);
     }
 
-    [HttpDelete]
-    public async Task<ActionResult<Guid> DeleteProduct(Guid id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteProduct(Guid id)
     {
-        var id = await _mediator.Send(createProductCommand);
-        return CreatedAtAction(nameof(GetProduct), new { id }, id);
+        var command = new DeleteProductCommand { Id = id };
+        var result = await _mediator.Send(command);
+
+        if (!result)
+            return NotFound();
+
+        return NoContent();
     }
 }
