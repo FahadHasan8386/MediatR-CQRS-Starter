@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IIS;
 using MiniCQRS.API.CQRS.Commands;
 using MiniCQRS.API.CQRS.Queries;
 using MiniCQRS.API.Models;
@@ -48,6 +49,22 @@ public class ProductsController : Controller
     {
         var id = await _mediator.Send(createProductCommand);
         return CreatedAtAction(nameof(GetProduct), new { id }, id);
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateProduct(Guid id ,UpdateProductCommand updateProductCommand)
+    {
+        if(id != updateProductCommand.Id)
+        {
+            return BadRequest();
+        }
+        var resullt = await _mediator.Send(updateProductCommand);
+
+        if(!resullt)
+        {
+            return NotFound();
+        }
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
