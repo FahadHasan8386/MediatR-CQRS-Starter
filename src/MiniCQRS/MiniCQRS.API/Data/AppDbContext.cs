@@ -16,7 +16,7 @@ namespace MiniCQRS.API.Data
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
-                    Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                    Id = Guid.Parse("1"),
                     Name = "Laptop",
                     Description = "High-performance laptop",
                     Price = 999.99m,
@@ -25,7 +25,7 @@ namespace MiniCQRS.API.Data
                 },
                 new Product
                 {
-                    Id = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                    Id = Guid.Parse("2"),
                     Name = "Mouse",
                     Description = "Wireless mouse",
                     Price = 29.99m,
